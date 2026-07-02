@@ -20,6 +20,7 @@ export class Login {
   login() {
     this.auth.login(this.loginRequest).subscribe({
       next: (response) => {
+        this.auth.saveTokens(response);
         console.log('Login success', response);
       },
       error: (error) => {
