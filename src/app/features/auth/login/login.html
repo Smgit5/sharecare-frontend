@@ -1,23 +1,37 @@
-<h1>Login</h1>
+<main class="login-page">
+  <section class="login-panel" aria-labelledby="login-title">
+    <div class="login-copy">
+      <p class="eyebrow">ShareCare</p>
+      <h1 id="login-title">Welcome back</h1>
+      <p>Sign in to manage campaigns and continue supporting the causes that matter.</p>
+    </div>
 
-<form (ngSubmit)="login()">
-  <div>
-    <label>Username</label>
-    <input
-      type="text"
-      name="username"
-      [(ngModel)]="loginRequest.username"
-    />
-  </div>
+    <form (ngSubmit)="login()" class="login-form">
+      <div class="form-field">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          name="username"
+          autocomplete="username"
+          required
+          [(ngModel)]="loginRequest.username"
+        />
+      </div>
 
-  <div>
-    <label>Password</label>
-    <input
-      type="password"
-      name="password"
-      [(ngModel)]="loginRequest.password"
-    />
-  </div>
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          autocomplete="current-password"
+          required
+          [(ngModel)]="loginRequest.password"
+        />
+      </div>
 
-  <button type="submit">Login</button>
-</form>
+      <button type="submit">Login</button>
+    </form>
+  </section>
+</main>
