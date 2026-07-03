@@ -1,5 +1,6 @@
 <div *ngFor="let campaign of campaigns()" class="campaign-card">
   <h2>{{ campaign.title }}</h2>
+  <h3>Status: {{campaign.status}}</h3>
   <p>{{ campaign.description }}</p>
   <p>₹{{ campaign.raisedAmount }} raised of ₹{{ campaign.targetAmount }}</p>
 

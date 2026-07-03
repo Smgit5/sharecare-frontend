@@ -7,8 +7,12 @@ import { CampaignResponse } from '../models/campaign.model';
 @Service()
 export class Campaign {
     private http = inject(HttpClient);
-    baseUrl = 'http://localhost:8080/campaigns';
+    private baseUrl = 'http://localhost:8080/campaigns';
     getCampaigns(): Observable<PageResponse<CampaignResponse>> {
         return this.http.get<PageResponse<CampaignResponse>>(`${this.baseUrl}`);
+    }
+
+    getCampaignById(id: string): Observable<CampaignResponse> {
+        return this.http.get<CampaignResponse>(`${this.baseUrl}/${id}`);
     }
 }

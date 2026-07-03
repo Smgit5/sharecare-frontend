@@ -1,1 +1,8 @@
-<p>details works!</p>
+@if (campaign()) {
+  <h2>{{ campaign()?.title }}</h2>
+  <p>{{ campaign()?.description }}</p>
+  <p>Target: {{ campaign()?.targetAmount }}</p>
+  <p>Raised: {{ campaign()?.raisedAmount }}</p>
+  <p>Status: {{campaign()?.status}}</p>
+  <p>CreatedAt: {{campaign()?.createdAt}}</p>
+}
