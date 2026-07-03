@@ -1,15 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
-
-interface LoginRequest {
-    username: string;
-    password: string;
-}
-interface AuthResponse {
-    accessToken: string;
-    refreshToken: string;
-}
+import { AuthResponse, LoginRequest } from '../models/auth.model';
 
 @Service()
 export class Auth {

@@ -4,21 +4,26 @@ import { Auth } from '../services/auth';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(Auth);
-  const publicUrls = [
-    "/auth/register", 
-    "/auth/login", 
-    "/auth/refresh", 
-    "/auth/logout", 
-    "/auth/forgot-password",
-    "/auth/reset-password"
-  ];
-  
-  const isPublicUrl = publicUrls.some(url => req.url.includes(url));
-  if(isPublicUrl) {
+  const isPublicRequest =
+    req.url.includes('/auth/login') ||
+    req.url.includes('/auth/register') ||
+    req.url.includes('/auth/refresh') ||
+    req.url.includes('/auth/logout') ||
+    req.url.includes('/auth/forgot-password') ||
+    req.url.includes('/auth/reset-password') ||
+    (
+      req.method === 'GET' &&
+      req.url.includes('/campaigns') &&
+      !req.url.includes('/campaigns/my')
+    ) ||
+    req.url.includes('/donations/razorpay/verify');
+
+  if (isPublicRequest) {
     return next(req);
   }
+
   const accessToken = auth.fetchAccessToken();
-  if(!accessToken) {
+  if (!accessToken) {
     return next(req);
   }
   const authReq = req.clone({
