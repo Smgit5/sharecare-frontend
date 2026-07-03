@@ -54,6 +54,34 @@ h1 {
   font-weight: 700;
 }
 
+.campaign-image {
+  margin: 28px 0;
+}
+
+.campaign-image div {
+  display: grid;
+  min-height: 280px;
+  aspect-ratio: 16 / 7;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid #e4e8e5;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(47, 125, 99, 0.18), transparent 45%),
+    linear-gradient(315deg, rgba(37, 87, 71, 0.12), transparent 48%),
+    #f4faf7;
+}
+
+.campaign-image span {
+  padding: 10px 14px;
+  border: 1px solid #cad6d0;
+  border-radius: 999px;
+  color: #255747;
+  background: rgba(255, 255, 255, 0.78);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
 .funding-panel {
   margin: 28px 0;
   padding: 24px;
@@ -144,8 +172,8 @@ article small {
 
 .donate-button {
   position: fixed;
+  top: 28px;
   right: 28px;
-  bottom: 28px;
   z-index: 10;
   min-width: 148px;
   min-height: 48px;
@@ -173,7 +201,6 @@ article small {
   .campaign-details {
     width: min(100% - 24px, 920px);
     margin: 28px auto;
-    padding-bottom: 84px;
   }
 
   .hero,
@@ -196,10 +223,15 @@ article small {
     grid-template-columns: 1fr;
   }
 
+  .campaign-image div {
+    min-height: 220px;
+    aspect-ratio: 4 / 3;
+  }
+
   .donate-button {
+    top: 12px;
     right: 12px;
-    bottom: 12px;
-    left: 12px;
-    width: calc(100% - 24px);
+    min-width: 132px;
+    min-height: 44px;
   }
 }
