@@ -5,4 +5,10 @@
   <p>Raised: {{ campaign()?.raisedAmount }}</p>
   <p>Status: {{campaign()?.status}}</p>
   <p>CreatedAt: {{campaign()?.createdAt}}</p>
+  <progress
+    [value]="campaign()?.progressPercentage ?? 0"
+    max="100">
+  </progress>
+
+  <p>{{ campaign()?.progressPercentage ?? 0 }}%</p>
 }

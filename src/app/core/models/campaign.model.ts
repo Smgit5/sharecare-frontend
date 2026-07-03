@@ -7,6 +7,7 @@ export interface CampaignResponse {
     description: string,
     targetAmount: number,
     raisedAmount: number,
+    progressPercentage: number,
     createdByUserId: string,
     createdAt: string,
     updatedAt: string,
