@@ -1,1 +1,13 @@
+<button
+  class="theme-toggle"
+  type="button"
+  [attr.aria-pressed]="theme.mode() === 'dark'"
+  (click)="theme.toggle()">
+  @if (theme.mode() === 'dark') {
+    Light
+  } @else {
+    Dark
+  }
+</button>
+
 <router-outlet></router-outlet>

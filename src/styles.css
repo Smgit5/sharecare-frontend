@@ -1,1 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  color-scheme: light;
+  --app-bg: #f7faf8;
+  --app-bg-soft: #ffffff;
+  --text: #16211d;
+  --text-soft: #23312c;
+  --muted: #66736d;
+  --muted-strong: #4e5c56;
+  --brand: #2f7d63;
+  --brand-strong: #276a54;
+  --brand-text: #255747;
+  --surface: #ffffff;
+  --surface-muted: #fbfcfb;
+  --surface-tint: #f4faf7;
+  --border: #e4e8e5;
+  --border-strong: #cad6d0;
+  --progress-track: #e8eeeb;
+  --on-brand: #ffffff;
+  --shadow-soft: 0 14px 40px rgba(22, 33, 29, 0.06);
+  --shadow-strong: 0 24px 70px rgba(22, 33, 29, 0.08);
+  --focus-ring: rgba(47, 125, 99, 0.28);
+  --focus-ring-soft: rgba(47, 125, 99, 0.16);
+  --placeholder-wash: rgba(47, 125, 99, 0.18);
+  --placeholder-wash-strong: rgba(37, 87, 71, 0.12);
+  --placeholder-label-bg: rgba(255, 255, 255, 0.78);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --app-bg: #101512;
+  --app-bg-soft: #151c18;
+  --text: #edf5f0;
+  --text-soft: #d6e1dc;
+  --muted: #9aa9a2;
+  --muted-strong: #bdcac4;
+  --brand: #66c49f;
+  --brand-strong: #7bd8b2;
+  --brand-text: #b8f1d8;
+  --surface: #18211d;
+  --surface-muted: #131a17;
+  --surface-tint: #1d2a25;
+  --border: #2a3832;
+  --border-strong: #3d5149;
+  --progress-track: #2a3832;
+  --on-brand: #07110d;
+  --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.28);
+  --shadow-strong: 0 24px 70px rgba(0, 0, 0, 0.34);
+  --focus-ring: rgba(102, 196, 159, 0.32);
+  --focus-ring-soft: rgba(102, 196, 159, 0.18);
+  --placeholder-wash: rgba(102, 196, 159, 0.16);
+  --placeholder-wash-strong: rgba(184, 241, 216, 0.08);
+  --placeholder-label-bg: rgba(24, 33, 29, 0.82);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background: var(--app-bg);
+}

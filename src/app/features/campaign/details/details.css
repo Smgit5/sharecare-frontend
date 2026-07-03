@@ -1,7 +1,7 @@
 .campaign-details {
   width: min(920px, calc(100% - 32px));
   margin: 48px auto;
-  color: #16211d;
+  color: var(--text);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -13,14 +13,14 @@
   gap: 24px;
   align-items: flex-start;
   padding-bottom: 28px;
-  border-bottom: 1px solid #e4e8e5;
+  border-bottom: 1px solid var(--border);
 }
 
 .eyebrow,
 .label {
   display: block;
   margin: 0 0 8px;
-  color: #66736d;
+  color: var(--muted);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0;
@@ -38,7 +38,7 @@ h1 {
 .description {
   max-width: 680px;
   margin: 18px 0 0;
-  color: #4e5c56;
+  color: var(--muted-strong);
   font-size: 1.05rem;
   line-height: 1.7;
 }
@@ -46,10 +46,10 @@ h1 {
 .status {
   flex: 0 0 auto;
   padding: 8px 12px;
-  border: 1px solid #cad6d0;
+  border: 1px solid var(--border-strong);
   border-radius: 999px;
-  color: #255747;
-  background: #f4faf7;
+  color: var(--brand-text);
+  background: var(--surface-tint);
   font-size: 0.85rem;
   font-weight: 700;
 }
@@ -64,20 +64,20 @@ h1 {
   aspect-ratio: 16 / 7;
   place-items: center;
   overflow: hidden;
-  border: 1px solid #e4e8e5;
+  border: 1px solid var(--border);
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(47, 125, 99, 0.18), transparent 45%),
-    linear-gradient(315deg, rgba(37, 87, 71, 0.12), transparent 48%),
-    #f4faf7;
+    linear-gradient(135deg, var(--placeholder-wash), transparent 45%),
+    linear-gradient(315deg, var(--placeholder-wash-strong), transparent 48%),
+    var(--surface-tint);
 }
 
 .campaign-image span {
   padding: 10px 14px;
-  border: 1px solid #cad6d0;
+  border: 1px solid var(--border-strong);
   border-radius: 999px;
-  color: #255747;
-  background: rgba(255, 255, 255, 0.78);
+  color: var(--brand-text);
+  background: var(--placeholder-label-bg);
   font-size: 0.85rem;
   font-weight: 800;
 }
@@ -85,10 +85,10 @@ h1 {
 .funding-panel {
   margin: 28px 0;
   padding: 24px;
-  border: 1px solid #e4e8e5;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #ffffff;
-  box-shadow: 0 14px 40px rgba(22, 33, 29, 0.06);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .funding-summary {
@@ -109,7 +109,7 @@ h1 {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 16px;
   align-items: center;
-  color: #255747;
+  color: var(--brand-text);
   font-weight: 800;
 }
 
@@ -119,21 +119,21 @@ progress {
   overflow: hidden;
   border: 0;
   border-radius: 999px;
-  background: #e8eeeb;
+  background: var(--progress-track);
 }
 
 progress::-webkit-progress-bar {
-  background: #e8eeeb;
+  background: var(--progress-track);
 }
 
 progress::-webkit-progress-value {
   border-radius: 999px;
-  background: #2f7d63;
+  background: var(--brand);
 }
 
 progress::-moz-progress-bar {
   border-radius: 999px;
-  background: #2f7d63;
+  background: var(--brand);
 }
 
 .details-grid {
@@ -145,14 +145,14 @@ progress::-moz-progress-bar {
 article {
   min-height: 120px;
   padding: 20px;
-  border: 1px solid #e4e8e5;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #fbfcfb;
+  background: var(--surface-muted);
 }
 
 article p {
   margin: 0;
-  color: #23312c;
+  color: var(--text-soft);
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -160,13 +160,13 @@ article p {
 article small {
   display: block;
   margin-top: 8px;
-  color: #66736d;
+  color: var(--muted);
   line-height: 1.5;
 }
 
 .loading {
   margin: 0;
-  color: #66736d;
+  color: var(--muted);
   font-size: 1rem;
 }
 
@@ -180,20 +180,20 @@ article small {
   padding: 0 22px;
   border: 0;
   border-radius: 999px;
-  color: #ffffff;
-  background: #2f7d63;
-  box-shadow: 0 14px 34px rgba(47, 125, 99, 0.28);
+  color: var(--on-brand);
+  background: var(--brand);
+  box-shadow: var(--shadow-soft);
   cursor: pointer;
   font: inherit;
   font-weight: 800;
 }
 
 .donate-button:hover {
-  background: #276a54;
+  background: var(--brand-strong);
 }
 
 .donate-button:focus-visible {
-  outline: 3px solid rgba(47, 125, 99, 0.28);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 4px;
 }
 
