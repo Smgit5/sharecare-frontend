@@ -8,8 +8,10 @@ import { CampaignResponse } from '../models/campaign.model';
 export class Campaign {
     private http = inject(HttpClient);
     private baseUrl = 'http://localhost:8080/campaigns';
-    getCampaigns(): Observable<PageResponse<CampaignResponse>> {
-        return this.http.get<PageResponse<CampaignResponse>>(`${this.baseUrl}`);
+    getCampaigns(page?: number): Observable<PageResponse<CampaignResponse>> {
+        const options = page === undefined ? {} : { params: { page } };
+
+        return this.http.get<PageResponse<CampaignResponse>>(`${this.baseUrl}`, options);
     }
 
     getCampaignById(id: string): Observable<CampaignResponse> {

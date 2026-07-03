@@ -142,10 +142,38 @@ article small {
   font-size: 1rem;
 }
 
+.donate-button {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 10;
+  min-width: 148px;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 999px;
+  color: #ffffff;
+  background: #2f7d63;
+  box-shadow: 0 14px 34px rgba(47, 125, 99, 0.28);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.donate-button:hover {
+  background: #276a54;
+}
+
+.donate-button:focus-visible {
+  outline: 3px solid rgba(47, 125, 99, 0.28);
+  outline-offset: 4px;
+}
+
 @media (max-width: 720px) {
   .campaign-details {
     width: min(100% - 24px, 920px);
     margin: 28px auto;
+    padding-bottom: 84px;
   }
 
   .hero,
@@ -166,5 +194,12 @@ article small {
   .funding-summary,
   .details-grid {
     grid-template-columns: 1fr;
+  }
+
+  .donate-button {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    width: calc(100% - 24px);
   }
 }

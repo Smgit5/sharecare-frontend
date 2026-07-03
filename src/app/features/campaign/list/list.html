@@ -1,10 +1,73 @@
-<div *ngFor="let campaign of campaigns()" class="campaign-card">
-  <h2>{{ campaign.title }}</h2>
-  <h3>Status: {{campaign.status}}</h3>
-  <p>{{ campaign.description }}</p>
-  <p>₹{{ campaign.raisedAmount }} raised of ₹{{ campaign.targetAmount }}</p>
+<main class="campaign-list">
+  <header class="list-header">
+    <div>
+      <p class="eyebrow">Campaigns</p>
+      <h1>Support active causes</h1>
+    </div>
 
-  <button (click)="viewDetails(campaign.id)">
-    View Details
-  </button>
-</div>
+    @if (page(); as pageInfo) {
+      <p class="result-count">
+        {{ pageInfo.totalElements }} campaigns
+      </p>
+    }
+  </header>
+
+  @if (isLoading()) {
+    <p class="state-message">Loading campaigns...</p>
+  } @else if (campaigns().length) {
+    <section class="campaign-grid" aria-label="Campaign list">
+      <article *ngFor="let campaign of campaigns()" class="campaign-card">
+        <div class="card-header">
+          <span class="category">{{ campaign.category }}</span>
+          <span class="status">{{ campaign.status }}</span>
+        </div>
+
+        <h2>{{ campaign.title }}</h2>
+        <p class="description">{{ campaign.description }}</p>
+
+        <div class="funding">
+          <div>
+            <span class="label">Raised</span>
+            <strong>{{ campaign.raisedAmount | currency: 'INR':'symbol':'1.0-0' }}</strong>
+          </div>
+
+          <div>
+            <span class="label">Goal</span>
+            <strong>{{ campaign.targetAmount | currency: 'INR':'symbol':'1.0-0' }}</strong>
+          </div>
+        </div>
+
+        <div class="progress-row">
+          <progress [value]="campaign.progressPercentage ?? 0" max="100"></progress>
+          <span>{{ campaign.progressPercentage ?? 0 }}%</span>
+        </div>
+
+        <button type="button" (click)="viewDetails(campaign.id)">
+          View Details
+        </button>
+      </article>
+    </section>
+
+    @if (page(); as pageInfo) {
+      <nav class="pagination" aria-label="Campaign pagination">
+        <button
+          type="button"
+          (click)="previousPage()"
+          [disabled]="pageInfo.page === 0">
+          Previous
+        </button>
+
+        <span>Page {{ pageInfo.page + 1 }} of {{ pageInfo.totalPages }}</span>
+
+        <button
+          type="button"
+          (click)="nextPage()"
+          [disabled]="pageInfo.lastPage">
+          Next
+        </button>
+      </nav>
+    }
+  } @else {
+    <p class="state-message">No campaigns found.</p>
+  }
+</main>
