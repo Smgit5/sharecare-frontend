@@ -1,3 +1,4 @@
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CampaignResponse } from '../../../core/models/campaign.model';
 import { Campaign } from '../../../core/services/campaign';
@@ -5,11 +6,11 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-details',
-  imports: [],
+  imports: [CurrencyPipe, DatePipe],
   templateUrl: './details.html',
   styleUrl: './details.css',
 })
-export class Details implements OnInit{
+export class Details implements OnInit {
   campaign = signal<CampaignResponse | null>(null);
   private campaignService = inject(Campaign);
   private route = inject(ActivatedRoute);

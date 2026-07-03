@@ -1,0 +1,170 @@
+.campaign-details {
+  width: min(920px, calc(100% - 32px));
+  margin: 48px auto;
+  color: #16211d;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #e4e8e5;
+}
+
+.eyebrow,
+.label {
+  display: block;
+  margin: 0 0 8px;
+  color: #66736d;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 720px;
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  font-weight: 750;
+  line-height: 1;
+}
+
+.description {
+  max-width: 680px;
+  margin: 18px 0 0;
+  color: #4e5c56;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.status {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border: 1px solid #cad6d0;
+  border-radius: 999px;
+  color: #255747;
+  background: #f4faf7;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.funding-panel {
+  margin: 28px 0;
+  padding: 24px;
+  border: 1px solid #e4e8e5;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 14px 40px rgba(22, 33, 29, 0.06);
+}
+
+.funding-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.funding-summary strong {
+  display: block;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  line-height: 1.1;
+}
+
+.progress-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  color: #255747;
+  font-weight: 800;
+}
+
+progress {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  background: #e8eeeb;
+}
+
+progress::-webkit-progress-bar {
+  background: #e8eeeb;
+}
+
+progress::-webkit-progress-value {
+  border-radius: 999px;
+  background: #2f7d63;
+}
+
+progress::-moz-progress-bar {
+  border-radius: 999px;
+  background: #2f7d63;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(2, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+article {
+  min-height: 120px;
+  padding: 20px;
+  border: 1px solid #e4e8e5;
+  border-radius: 8px;
+  background: #fbfcfb;
+}
+
+article p {
+  margin: 0;
+  color: #23312c;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+article small {
+  display: block;
+  margin-top: 8px;
+  color: #66736d;
+  line-height: 1.5;
+}
+
+.loading {
+  margin: 0;
+  color: #66736d;
+  font-size: 1rem;
+}
+
+@media (max-width: 720px) {
+  .campaign-details {
+    width: min(100% - 24px, 920px);
+    margin: 28px auto;
+  }
+
+  .hero,
+  .progress-row {
+    display: block;
+  }
+
+  .status {
+    display: inline-block;
+    margin-top: 18px;
+  }
+
+  .progress-row span {
+    display: block;
+    margin-top: 10px;
+  }
+
+  .funding-summary,
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}
