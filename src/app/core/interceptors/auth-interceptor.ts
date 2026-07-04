@@ -1,9 +1,9 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Auth } from '../services/auth';
+import { AuthService } from '../services/auth';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const auth = inject(Auth);
+  const auth = inject(AuthService);
   const isPublicRequest =
     req.url.includes('/auth/login') ||
     req.url.includes('/auth/register') ||

@@ -5,7 +5,7 @@ import { PageResponse } from '../models/page.model';
 import { CampaignResponse } from '../models/campaign.model';
 
 @Service()
-export class Campaign {
+export class CampaignService {
     private http = inject(HttpClient);
     private baseUrl = 'http://localhost:8080/campaigns';
     getCampaigns(page?: number): Observable<PageResponse<CampaignResponse>> {

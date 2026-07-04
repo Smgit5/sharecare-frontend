@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthResponse, LoginRequest } from '../models/auth.model';
 
 @Service()
-export class Auth {
+export class AuthService {
     private http = inject(HttpClient);
     private baseUrl = "http://localhost:8080/auth";
 

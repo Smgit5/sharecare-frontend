@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Auth } from '../../../core/services/auth';
+import { AuthService } from '../../../core/services/auth';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../../../core/models/auth.model';
 
@@ -17,13 +17,13 @@ export class Login {
     password: ''
   }
 
-  private auth = inject(Auth);
+  private authService = inject(AuthService);
   private router = inject(Router);
 
   login() {
-    this.auth.login(this.loginRequest).subscribe({
+    this.authService.login(this.loginRequest).subscribe({
       next: (response) => {
-        this.auth.saveTokens(response);
+        this.authService.saveTokens(response);
         this.router.navigate(['/campaigns']);
       },
       error: (error) => {
