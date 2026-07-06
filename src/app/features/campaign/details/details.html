@@ -12,6 +12,12 @@
 
     <button class="donate-button" type="button" (click)="openDonateModal()">Donate Now</button>
 
+    @if (showSuccessBanner()) {
+      <div class="success-toast" role="status" aria-live="polite">
+        Donation successful! Thank you for your contribution.
+      </div>
+    }
+
     <section class="campaign-image" aria-label="Campaign image placeholder">
       <div>
         <span>Image coming soon</span>

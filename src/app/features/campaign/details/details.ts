@@ -1,5 +1,5 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, inject, OnInit, output, signal } from '@angular/core';
+import { Component, inject, NgZone, OnInit, signal } from '@angular/core';
 import { CampaignResponse } from '../../../core/models/campaign.model';
 import { CampaignService } from '../../../core/services/campaign';
 import { ActivatedRoute } from '@angular/router';
@@ -16,13 +16,16 @@ import { RazorpayService } from '../../../core/services/razorpay.service';
 export class Details implements OnInit {
   campaign = signal<CampaignResponse | null>(null);
   isDonateModalOpen = signal(false);
+  showSuccessBanner = signal(false);
   donationAmountInvalid = signal(false);
   private campaignId = '';
+  private successBannerTimeout: ReturnType<typeof setTimeout> | null = null;
 
   private campaignService = inject(CampaignService);
   private route = inject(ActivatedRoute);
   private donationService = inject(DonationService);
   private razorpayService = inject(RazorpayService);
+  private ngZone = inject(NgZone);
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -58,9 +61,17 @@ export class Details implements OnInit {
   verifyRazorpayPayment(paymentResponse: RazorpayPaymentSuccessResponse) {
     this.donationService.verifyRazorpayPayment(paymentResponse).subscribe({
       next: (apiResponse) => {
-        console.log(apiResponse.message);
-        this.closeDonateModal();
+        if (this.successBannerTimeout) {
+          clearTimeout(this.successBannerTimeout);
+        }
+
         this.loadCampaignDetails();
+        this.showSuccessBanner.set(true);
+        this.successBannerTimeout = setTimeout(() => {
+          this.showSuccessBanner.set(false);
+          this.successBannerTimeout = null;
+        }, 3000);
+        this.closeDonateModal();
       },
       error: (error) => {
         console.log('Payment verification failed.', error);
@@ -88,7 +99,7 @@ export class Details implements OnInit {
           response,
           this.campaign()?.title ?? 'Campaign Donation',
           (paymentResponse) => {
-            this.verifyRazorpayPayment(paymentResponse);
+            this.ngZone.run(() => this.verifyRazorpayPayment(paymentResponse));
           }
         );
       },
