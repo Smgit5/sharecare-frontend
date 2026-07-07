@@ -175,7 +175,8 @@ body {
 }
 
 .success-toast,
-.info-toast {
+.info-toast,
+.error-toast {
   position: fixed;
   top: 92px;
   right: 28px;
@@ -203,6 +204,12 @@ body {
   background: var(--surface);
 }
 
+.error-toast {
+  border-color: #ffb4b4;
+  color: #fff5f5;
+  background: #b42318;
+}
+
 @keyframes toastFade {
   0% {
     opacity: 0;
@@ -227,7 +234,8 @@ body {
   }
 
   .success-toast,
-  .info-toast {
+  .info-toast,
+  .error-toast {
     top: 68px;
     right: 12px;
     width: calc(100% - 24px);

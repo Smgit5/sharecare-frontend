@@ -18,16 +18,19 @@ export class Details implements OnInit {
   isDonateModalOpen = signal(false);
   showSuccessBanner = signal(false);
   showInfoToast = signal(false);
+  showErrorToast = signal(false);
   donationAmountInvalid = signal(false);
   private campaignId = '';
   private successBannerTimeout: ReturnType<typeof setTimeout> | null = null;
   private infoToastTimeout: ReturnType<typeof setTimeout> | null = null;
+  private errorToastTimeout: ReturnType<typeof setTimeout> | null = null;
 
   private campaignService = inject(CampaignService);
   private route = inject(ActivatedRoute);
   private donationService = inject(DonationService);
   private razorpayService = inject(RazorpayService);
   private ngZone = inject(NgZone);
+  private paymentFailureHandled = false;
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -72,6 +75,18 @@ export class Details implements OnInit {
     }, 3000);
   }
 
+  showPaymentFailedToast(): void {
+    if (this.errorToastTimeout) {
+      clearTimeout(this.errorToastTimeout);
+    }
+
+    this.showErrorToast.set(true);
+    this.errorToastTimeout = setTimeout(() => {
+      this.showErrorToast.set(false);
+      this.errorToastTimeout = null;
+    }, 3000);
+  }
+
   verifyRazorpayPayment(paymentResponse: RazorpayPaymentSuccessResponse) {
     this.donationService.verifyRazorpayPayment(paymentResponse).subscribe({
       next: (apiResponse) => {
@@ -109,6 +124,7 @@ export class Details implements OnInit {
 
     this.donationService.donate(donationRequest).subscribe({
       next: (response) => {
+        this.paymentFailureHandled = false;
         this.razorpayService.openCheckout(
           response,
           this.campaign()?.title ?? 'Campaign Donation',
@@ -118,6 +134,16 @@ export class Details implements OnInit {
           () => {
             this.ngZone.run(() => {
               this.showCheckoutClosedToast();
+            });
+          },
+          (failureResponse) => {
+            this.ngZone.run(() => {
+              if (this.paymentFailureHandled) {
+                return;
+              }
+              this.paymentFailureHandled = true;
+              console.log(failureResponse);
+              this.showPaymentFailedToast();
             });
           }
         );

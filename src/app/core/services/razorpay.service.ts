@@ -9,7 +9,8 @@ export class RazorpayService {
     initiationResponse: DonationInitiationResponse,
     campaignTitle: string,
     onSuccess: (response: RazorpayPaymentSuccessResponse) => void,
-    onDismiss: () => void
+    onDismiss: () => void,
+    onFailure: (failureResponse: any) => void
   ): void {
     const options = {
       key: initiationResponse.keyId,
@@ -19,7 +20,6 @@ export class RazorpayService {
       description: campaignTitle,
       order_id: initiationResponse.providerOrderId,
       handler: (paymentResponse: RazorpayPaymentSuccessResponse) => {
-        console.log('Payment Success', paymentResponse);
         onSuccess(paymentResponse);
       },
 
@@ -29,6 +29,7 @@ export class RazorpayService {
     };
 
     const razorpay = new Razorpay(options);
+    razorpay.on('payment.failed', onFailure);
     razorpay.open();
   }
 }
