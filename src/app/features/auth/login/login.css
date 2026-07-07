@@ -82,6 +82,32 @@ input:focus {
   outline: 3px solid var(--focus-ring-soft);
 }
 
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 82px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  min-height: 34px;
+  margin: 0;
+  padding: 0 12px;
+  transform: translateY(-50%);
+  color: var(--brand-text);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  font-size: 0.85rem;
+}
+
+.password-toggle:hover {
+  background: var(--surface-tint);
+}
+
 button {
   min-height: 48px;
   margin-top: 4px;
