@@ -17,9 +17,11 @@ export class Details implements OnInit {
   campaign = signal<CampaignResponse | null>(null);
   isDonateModalOpen = signal(false);
   showSuccessBanner = signal(false);
+  showInfoToast = signal(false);
   donationAmountInvalid = signal(false);
   private campaignId = '';
   private successBannerTimeout: ReturnType<typeof setTimeout> | null = null;
+  private infoToastTimeout: ReturnType<typeof setTimeout> | null = null;
 
   private campaignService = inject(CampaignService);
   private route = inject(ActivatedRoute);
@@ -56,6 +58,18 @@ export class Details implements OnInit {
 
   closeDonateModal(): void {
     this.isDonateModalOpen.set(false);
+  }
+
+  showCheckoutClosedToast(): void {
+    if (this.infoToastTimeout) {
+      clearTimeout(this.infoToastTimeout);
+    }
+
+    this.showInfoToast.set(true);
+    this.infoToastTimeout = setTimeout(() => {
+      this.showInfoToast.set(false);
+      this.infoToastTimeout = null;
+    }, 3000);
   }
 
   verifyRazorpayPayment(paymentResponse: RazorpayPaymentSuccessResponse) {
@@ -100,6 +114,11 @@ export class Details implements OnInit {
           this.campaign()?.title ?? 'Campaign Donation',
           (paymentResponse) => {
             this.ngZone.run(() => this.verifyRazorpayPayment(paymentResponse));
+          },
+          () => {
+            this.ngZone.run(() => {
+              this.showCheckoutClosedToast();
+            });
           }
         );
       },

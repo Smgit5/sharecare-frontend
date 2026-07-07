@@ -8,7 +8,8 @@ export class RazorpayService {
   openCheckout(
     initiationResponse: DonationInitiationResponse,
     campaignTitle: string,
-    onSuccess: (response: RazorpayPaymentSuccessResponse) => void
+    onSuccess: (response: RazorpayPaymentSuccessResponse) => void,
+    onDismiss: () => void
   ): void {
     const options = {
       key: initiationResponse.keyId,
@@ -20,6 +21,10 @@ export class RazorpayService {
       handler: (paymentResponse: RazorpayPaymentSuccessResponse) => {
         console.log('Payment Success', paymentResponse);
         onSuccess(paymentResponse);
+      },
+
+      modal: {
+        ondismiss: onDismiss
       }
     };
 

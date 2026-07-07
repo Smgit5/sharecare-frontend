@@ -18,6 +18,12 @@
       </div>
     }
 
+    @if (showInfoToast()) {
+      <div class="info-toast" role="status" aria-live="polite">
+        Checkout closed. Donation was not completed.
+      </div>
+    }
+
     <section class="campaign-image" aria-label="Campaign image placeholder">
       <div>
         <span>Image coming soon</span>

@@ -195,42 +195,6 @@ article small {
   outline-offset: 4px;
 }
 
-.success-toast {
-  position: fixed;
-  top: 92px;
-  right: 28px;
-  z-index: 40;
-  width: min(360px, calc(100% - 32px));
-  padding: 16px 18px;
-  border: 1px solid rgba(183, 230, 205, 0.75);
-  border-radius: 8px;
-  color: #f3fff8;
-  background: #1f7a4d;
-  box-shadow: 0 18px 48px rgba(22, 33, 29, 0.22);
-  font-weight: 800;
-  line-height: 1.45;
-  text-align: left;
-  animation: toastFade 3s forwards;
-}
-
-@keyframes toastFade {
-  0% {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-
-  12%,
-  88% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-}
-
 @media (max-width: 720px) {
   .campaign-details {
     width: min(100% - 24px, 920px);
@@ -267,12 +231,6 @@ article small {
     right: 12px;
     min-width: 132px;
     min-height: 44px;
-  }
-
-  .success-toast {
-    top: 68px;
-    right: 12px;
-    width: calc(100% - 24px);
   }
 
 }
