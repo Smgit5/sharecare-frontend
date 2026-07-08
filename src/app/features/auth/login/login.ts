@@ -30,9 +30,6 @@ export class Login {
       next: (response) => {
         this.authService.saveTokens(response);
         this.router.navigate(['/campaigns']);
-      },
-      error: (error) => {
-        console.log('Login failed', error);
       }
     });
   }

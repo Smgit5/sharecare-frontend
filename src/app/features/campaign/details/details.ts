@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DonationRequest, RazorpayPaymentSuccessResponse } from '../../../core/models/donation.model';
 import { DonationService } from '../../../core/services/donation';
 import { RazorpayService } from '../../../core/services/razorpay.service';
+import { ToastService } from '../../../core/services/toast';
 
 @Component({
   selector: 'app-details',
@@ -16,21 +17,15 @@ import { RazorpayService } from '../../../core/services/razorpay.service';
 export class Details implements OnInit {
   campaign = signal<CampaignResponse | null>(null);
   isDonateModalOpen = signal(false);
-  showSuccessBanner = signal(false);
-  showInfoToast = signal(false);
-  showErrorToast = signal(false);
   donationAmountInvalid = signal(false);
   private campaignId = '';
-  private successBannerTimeout: ReturnType<typeof setTimeout> | null = null;
-  private infoToastTimeout: ReturnType<typeof setTimeout> | null = null;
-  private errorToastTimeout: ReturnType<typeof setTimeout> | null = null;
 
   private campaignService = inject(CampaignService);
   private route = inject(ActivatedRoute);
   private donationService = inject(DonationService);
   private razorpayService = inject(RazorpayService);
+  private toastService = inject(ToastService);
   private ngZone = inject(NgZone);
-  private paymentFailureHandled = false;
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -63,47 +58,16 @@ export class Details implements OnInit {
     this.isDonateModalOpen.set(false);
   }
 
-  showCheckoutClosedToast(): void {
-    if (this.infoToastTimeout) {
-      clearTimeout(this.infoToastTimeout);
-    }
-
-    this.showInfoToast.set(true);
-    this.infoToastTimeout = setTimeout(() => {
-      this.showInfoToast.set(false);
-      this.infoToastTimeout = null;
-    }, 3000);
-  }
-
-  showPaymentFailedToast(): void {
-    if (this.errorToastTimeout) {
-      clearTimeout(this.errorToastTimeout);
-    }
-
-    this.showErrorToast.set(true);
-    this.errorToastTimeout = setTimeout(() => {
-      this.showErrorToast.set(false);
-      this.errorToastTimeout = null;
-    }, 3000);
-  }
-
   verifyRazorpayPayment(paymentResponse: RazorpayPaymentSuccessResponse) {
     this.donationService.verifyRazorpayPayment(paymentResponse).subscribe({
-      next: (apiResponse) => {
-        if (this.successBannerTimeout) {
-          clearTimeout(this.successBannerTimeout);
-        }
-
+      next: () => {
         this.loadCampaignDetails();
-        this.showSuccessBanner.set(true);
-        this.successBannerTimeout = setTimeout(() => {
-          this.showSuccessBanner.set(false);
-          this.successBannerTimeout = null;
-        }, 3000);
+        this.toastService.showSuccessToast('Donation successful! Thank you for your contribution.');
         this.closeDonateModal();
       },
       error: (error) => {
         console.log('Payment verification failed.', error);
+        this.toastService.showErrorToast('Payment verification failed. Please try again.');
       }
     });
   }
@@ -124,7 +88,6 @@ export class Details implements OnInit {
 
     this.donationService.donate(donationRequest).subscribe({
       next: (response) => {
-        this.paymentFailureHandled = false;
         this.razorpayService.openCheckout(
           response,
           this.campaign()?.title ?? 'Campaign Donation',
@@ -133,17 +96,13 @@ export class Details implements OnInit {
           },
           () => {
             this.ngZone.run(() => {
-              this.showCheckoutClosedToast();
+              this.toastService.showInfoToast('Checkout closed. Donation was not completed.');
             });
           },
           (failureResponse) => {
             this.ngZone.run(() => {
-              if (this.paymentFailureHandled) {
-                return;
-              }
-              this.paymentFailureHandled = true;
               console.log(failureResponse);
-              this.showPaymentFailedToast();
+              this.toastService.showErrorToast('Payment failed. Please try again.');
             });
           }
         );

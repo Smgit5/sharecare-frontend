@@ -10,4 +10,13 @@
   }
 </button>
 
+@if (toastService.toast(); as toast) {
+  <div
+    class="toast toast-{{ toast.kind }}"
+    [attr.role]="toast.kind === 'error' ? 'alert' : 'status'"
+    [attr.aria-live]="toast.kind === 'error' ? 'assertive' : 'polite'">
+    {{ toast.message }}
+  </div>
+}
+
 <router-outlet></router-outlet>

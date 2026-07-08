@@ -12,24 +12,6 @@
 
     <button class="donate-button" type="button" (click)="openDonateModal()">Donate Now</button>
 
-    @if (showSuccessBanner()) {
-      <div class="success-toast" role="status" aria-live="polite">
-        Donation successful! Thank you for your contribution.
-      </div>
-    }
-
-    @if (showInfoToast()) {
-      <div class="info-toast" role="status" aria-live="polite">
-        Checkout closed. Donation was not completed.
-      </div>
-    }
-
-    @if (showErrorToast()) {
-      <div class="error-toast" role="alert" aria-live="assertive">
-        Payment failed. Please try again.
-      </div>
-    }
-
     <section class="campaign-image" aria-label="Campaign image placeholder">
       <div>
         <span>Image coming soon</span>
