@@ -1,0 +1,48 @@
+<main class="register-page">
+  <section class="register-panel" aria-labelledby="register-title">
+    <div class="register-copy">
+      <p class="eyebrow">ShareCare</p>
+      <h1 id="register-title">Create your account</h1>
+      <p>Join ShareCare to support campaigns and manage your donations in one place.</p>
+    </div>
+
+    <form (ngSubmit)="register()" class="register-form">
+      <div class="form-field">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          name="username"
+          autocomplete="username"
+          required
+          [(ngModel)]="userRegisterRequest.username"
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="password">Password</label>
+        <div class="password-field">
+          <input
+            id="password"
+            [type]="showPassword() ? 'text' : 'password'"
+            name="password"
+            autocomplete="new-password"
+            required
+            [(ngModel)]="userRegisterRequest.password"
+          />
+
+          <button
+            class="password-toggle"
+            type="button"
+            [attr.aria-pressed]="showPassword()"
+            [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+            (click)="togglePasswordVisibility()">
+            {{ showPassword() ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </section>
+</main>

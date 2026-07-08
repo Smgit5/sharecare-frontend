@@ -9,3 +9,8 @@ export interface AuthResponse{
     accessToken: string;
     refreshToken: string;
 }
+
+export interface UserRegisterRequest {
+    username: string;
+    password: string;
+}
