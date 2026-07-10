@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthResponse, LoginRequest } from '../models/auth.model';
+import { AuthResponse, LoginRequest, RefreshTokenRequest } from '../models/auth.model';
 
 @Service()
 export class AuthService {
@@ -10,6 +10,10 @@ export class AuthService {
 
     login(request: LoginRequest): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(`${this.baseUrl}/login`, request);
+    }
+
+    refresh(refreshTokenRequest: RefreshTokenRequest) {
+        return this.http.post<AuthResponse>(`${this.baseUrl}/refresh`, refreshTokenRequest);
     }
 
     saveTokens(authResponse: AuthResponse) {

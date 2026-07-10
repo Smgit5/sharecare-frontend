@@ -14,3 +14,7 @@ export interface UserRegisterRequest {
     username: string;
     password: string;
 }
+
+export interface RefreshTokenRequest {
+    token: string;
+}
