@@ -1,0 +1,18 @@
+/* Center the demo button and keep it above fixed UI like the theme toggle */
+.demo-test-button {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000;
+	min-width: 160px;
+	padding: 10px 16px;
+	border-radius: 8px;
+}
+
+@media (max-width: 720px) {
+	.demo-test-button {
+		min-width: 140px;
+		padding: 8px 12px;
+	}
+}
