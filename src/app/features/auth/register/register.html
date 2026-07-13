@@ -52,9 +52,13 @@
           required
           [(ngModel)]="confirmPassword"
         />
+
+        @if (confirmPassword.length > 0 && !passwordsMatch()) {
+          <p class="field-error">Passwords do not match.</p>
+        }
       </div>
 
-      <button type="submit">Register</button>
+      <button type="submit" [disabled]="!canRegister()">Register</button>
 
       <div class="auth-switch">
         <span>Already have an account?</span>

@@ -27,7 +27,25 @@ export class Register {
     this.showPassword.update((isVisible) => !isVisible);
   }
 
+  passwordsMatch(): boolean {
+    return this.userRegisterRequest.password === this.confirmPassword;
+  }
+
+  canRegister(): boolean {
+    return (
+      this.userRegisterRequest.username.trim().length > 0 &&
+      this.userRegisterRequest.password.length > 0 &&
+      this.confirmPassword.length > 0 &&
+      this.passwordsMatch()
+    );
+  }
+
   register(): void {
+    if (!this.passwordsMatch()) {
+      this.toastService.showErrorToast('Passwords do not match.');
+      return;
+    }
+
     this.authService.register(this.userRegisterRequest).subscribe({
       next: (response) => {
         console.log(response);
