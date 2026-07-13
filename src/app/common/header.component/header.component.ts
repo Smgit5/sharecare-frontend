@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth';
 import { Theme } from '../../core/services/theme';
 import { RefreshTokenRequest } from '../../core/models/auth.model';
@@ -6,7 +7,7 @@ import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
