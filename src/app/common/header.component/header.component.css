@@ -1,0 +1,95 @@
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 72px;
+  padding: 20px 32px 20px 140px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  color: var(--brand-text);
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle {
+  min-width: 92px;
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-muted);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+.logout-button {
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--text);
+  background: var(--surface);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.logout-button:hover {
+  background: var(--surface-muted);
+}
+
+.logout-button:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+@media (max-width: 720px) {
+  .site-header {
+    min-height: 64px;
+    padding: 16px 16px 16px 100px;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .theme-toggle {
+    min-width: 78px;
+    min-height: 38px;
+    padding: 0 14px;
+  }
+
+  .logout-button {
+    min-height: 38px;
+    padding: 0 14px;
+  }
+}

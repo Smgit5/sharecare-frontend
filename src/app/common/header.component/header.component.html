@@ -1,0 +1,21 @@
+<header class="site-header">
+  <a class="brand">ShareCare</a>
+
+  <div class="header-actions">
+    <button
+      class="theme-toggle"
+      type="button"
+      [attr.aria-pressed]="theme.mode() === 'dark'"
+      (click)="theme.toggle()">
+      @if (theme.mode() === 'dark') {
+        Light
+      } @else {
+        Dark
+      }
+    </button>
+
+    @if (authService.isAuthenticated()) {
+      <button class="logout-button" type="button" (click)="logout()">Logout</button>
+    }
+  </div>
+</header>
