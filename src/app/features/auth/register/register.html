@@ -42,7 +42,24 @@
         </div>
       </div>
 
+      <div class="form-field">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          name="confirmPassword"
+          autocomplete="new-password"
+          required
+          [(ngModel)]="confirmPassword"
+        />
+      </div>
+
       <button type="submit">Register</button>
+
+      <div class="auth-switch">
+        <span>Already have an account?</span>
+        <button type="button" routerLink="/login">Login</button>
+      </div>
     </form>
   </section>
 </main>

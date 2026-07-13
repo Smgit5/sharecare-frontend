@@ -129,6 +129,27 @@ button:focus-visible {
   outline-offset: 4px;
 }
 
+.auth-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.auth-switch span {
+  color: var(--muted-strong);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.auth-switch button {
+  min-height: 40px;
+  margin-top: 0;
+  padding: 0 18px;
+}
+
 @media (max-width: 760px) {
   .register-page {
     min-height: 100dvh;

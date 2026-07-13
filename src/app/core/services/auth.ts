@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { signal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthResponse, LoginRequest, RefreshTokenRequest } from '../models/auth.model';
+import { AuthResponse, LoginRequest, RefreshTokenRequest, UserRegisterRequest } from '../models/auth.model';
 import { ApiResponse } from '../models/page.model';
 import { Router } from '@angular/router';
 
@@ -12,6 +12,10 @@ export class AuthService {
     private router = inject(Router);
     private baseUrl = 'http://localhost:8080/auth';
     private authenticated = signal(!!this.fetchAccessToken());
+
+    register(userRegisterRequest: UserRegisterRequest): Observable<any> {
+        return this.http.post<any>(`${this.baseUrl}/register`, userRegisterRequest);
+    }
 
     login(request: LoginRequest): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(`${this.baseUrl}/login`, request);
