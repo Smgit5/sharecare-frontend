@@ -21,7 +21,7 @@
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .theme-toggle {
@@ -68,6 +68,37 @@
   outline-offset: 4px;
 }
 
+.auth-actions-group {
+  display: inline-flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.auth-actions-group .logout-button {
+  min-width: 0;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.auth-actions-group .logout-button + .logout-button {
+  border-left: 1px solid var(--border-strong);
+}
+
+.auth-actions-group .logout-button:hover {
+  background: var(--surface-muted);
+}
+
+.auth-actions-group .logout-button:focus-visible {
+  outline-offset: -2px;
+}
+
 @media (max-width: 720px) {
   .site-header {
     min-height: 64px;
@@ -91,5 +122,10 @@
   .logout-button {
     min-height: 38px;
     padding: 0 14px;
+  }
+
+  .auth-actions-group .logout-button {
+    min-height: 38px;
+    padding: 0 12px;
   }
 }

@@ -17,8 +17,10 @@
     @if (authService.isAuthenticated()) {
       <button class="logout-button" type="button" (click)="logout()">Logout</button>
     } @else {
-      <button class="logout-button" type="button" routerLink="/login">Login</button>
-      <button class="logout-button" type="button" routerLink="/register">Register</button>
+      <div class="auth-actions-group" aria-label="Authentication actions">
+        <button class="logout-button" type="button" routerLink="/login">Login</button>
+        <button class="logout-button" type="button" routerLink="/register">Register</button>
+      </div>
     }
   </div>
 </header>
