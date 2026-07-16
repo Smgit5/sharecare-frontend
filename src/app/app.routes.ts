@@ -6,6 +6,7 @@ import { DemoTestComponent } from './temp/demo.test.component/demo.test.componen
 import { Register } from './features/auth/register/register';
 import { HomeComponent } from './features/home/home.component/home.component';
 import { EmailVerificationComponent } from './features/auth/email-verification.component/email-verification.component';
+import { ResendVerificationEmailComponent } from './features/auth/resend-verification-email.component/resend-verification-email.component';
 
 export const routes: Routes = [
     {
@@ -15,6 +16,10 @@ export const routes: Routes = [
     {
         path: 'verify-email',
         component: EmailVerificationComponent
+    },
+    {
+        path: 'resend-verification-email',
+        component: ResendVerificationEmailComponent
     },
     {
         path: 'demo-test',

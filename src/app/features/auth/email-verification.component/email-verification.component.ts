@@ -27,13 +27,12 @@ export class EmailVerificationComponent implements OnInit {
     }
     this.authService.verifyEmail(token).subscribe({
       next: (response) => {
-        console.log(response);
         this.title.set('Email Verified!');
         this.message.set('Your email has been verified successfully. Redirecting you to login...');
         this.toastService.showSuccessToast('Email verified successfully.');
         setTimeout(() => {
           this.router.navigate(['/login']);
-        }, 2500);
+        }, 3500);
       },
       error: (error) => {
         this.title.set('Verification Failed');

@@ -19,3 +19,7 @@ export interface UserRegisterRequest {
 export interface RefreshTokenRequest {
     token: string;
 }
+
+export interface ResendVerificationEmailRequest {
+    email: string;
+}

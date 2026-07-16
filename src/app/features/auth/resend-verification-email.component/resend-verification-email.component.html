@@ -1,0 +1,32 @@
+<main class="resend-page">
+  <section class="resend-panel" aria-labelledby="resend-title">
+    <div class="resend-copy">
+      <p class="eyebrow">ShareCare</p>
+      <h1 id="resend-title">{{ title() }}</h1>
+      <p>{{ message() }}</p>
+    </div>
+
+    <form (ngSubmit)="resendEmail()" class="resend-form">
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          autocomplete="email"
+          required
+          [(ngModel)]="verificationEmailRequest.email"
+        />
+      </div>
+
+      <button type="submit" [disabled]="!canSubmit()">
+        {{ isSubmitting() ? 'Sending...' : 'Resend verification email' }}
+      </button>
+
+      <div class="auth-switch">
+        <span>Remembered your password?</span>
+        <button type="button" routerLink="/login">Back to login</button>
+      </div>
+    </form>
+  </section>
+</main>

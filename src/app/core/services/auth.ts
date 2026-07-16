@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { signal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthResponse, LoginRequest, RefreshTokenRequest, UserRegisterRequest } from '../models/auth.model';
+import { AuthResponse, LoginRequest, RefreshTokenRequest, ResendVerificationEmailRequest, UserRegisterRequest } from '../models/auth.model';
 import { ApiResponse } from '../models/page.model';
 import { Router } from '@angular/router';
 
@@ -17,11 +17,18 @@ export class AuthService {
         return this.http.post<void>(`${this.baseUrl}/register`, userRegisterRequest);
     }
 
-    verifyEmail(token: string): Observable<ApiResponse> {
+    verifyEmail(token: string): Observable<void> {
         const params = new HttpParams().set('token', token);
-        return this.http.get<ApiResponse>(
+        return this.http.get<void>(
             `${this.baseUrl}/verify-email`,
             {params}
+        );
+    }
+
+    resendVerificationEmail(verificationEmailRequest: ResendVerificationEmailRequest): Observable<void> {
+        return this.http.post<void>(
+            `${this.baseUrl}/resend-verification-email`,
+            verificationEmailRequest
         );
     }
 
