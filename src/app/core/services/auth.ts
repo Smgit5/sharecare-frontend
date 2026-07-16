@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { signal } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -13,8 +13,16 @@ export class AuthService {
     private baseUrl = 'http://localhost:8080/auth';
     private authenticated = signal(!!this.fetchAccessToken());
 
-    register(userRegisterRequest: UserRegisterRequest): Observable<any> {
-        return this.http.post<any>(`${this.baseUrl}/register`, userRegisterRequest);
+    register(userRegisterRequest: UserRegisterRequest): Observable<void> {
+        return this.http.post<void>(`${this.baseUrl}/register`, userRegisterRequest);
+    }
+
+    verifyEmail(token: string): Observable<ApiResponse> {
+        const params = new HttpParams().set('token', token);
+        return this.http.get<ApiResponse>(
+            `${this.baseUrl}/verify-email`,
+            {params}
+        );
     }
 
     login(request: LoginRequest): Observable<AuthResponse> {

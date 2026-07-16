@@ -5,11 +5,16 @@ import { Details } from './features/campaign/details/details';
 import { DemoTestComponent } from './temp/demo.test.component/demo.test.component';
 import { Register } from './features/auth/register/register';
 import { HomeComponent } from './features/home/home.component/home.component';
+import { EmailVerificationComponent } from './features/auth/email-verification.component/email-verification.component';
 
 export const routes: Routes = [
     {
         path: '',
         component: List
+    },
+    {
+        path: 'verify-email',
+        component: EmailVerificationComponent
     },
     {
         path: 'demo-test',

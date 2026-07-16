@@ -19,7 +19,8 @@ export class Register {
 
   userRegisterRequest: UserRegisterRequest = {
     username: '',
-    password: ''
+    password: '',
+    email: ''
   };
   confirmPassword = '';
 
@@ -34,6 +35,7 @@ export class Register {
   canRegister(): boolean {
     return (
       this.userRegisterRequest.username.trim().length > 0 &&
+      this.userRegisterRequest.email.trim().length > 0 &&
       this.userRegisterRequest.password.length > 0 &&
       this.confirmPassword.length > 0 &&
       this.passwordsMatch()
@@ -48,9 +50,7 @@ export class Register {
 
     this.authService.register(this.userRegisterRequest).subscribe({
       next: (response) => {
-        console.log(response);
-        this.toastService.showSuccessToast('Registration successful. Please login.');
-        this.router.navigate(['/login']);
+        this.toastService.showSuccessToast('Registration successful. An email has been sent to your gmail inbox. Please verify your email.', 5000);
       },
       error: (error) => {
         console.log(error);

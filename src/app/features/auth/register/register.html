@@ -20,6 +20,18 @@
       </div>
 
       <div class="form-field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          autocomplete="email"
+          required
+          [(ngModel)]="userRegisterRequest.email"
+        />
+      </div>
+
+      <div class="form-field">
         <label for="password">Password</label>
         <div class="password-field">
           <input
