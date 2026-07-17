@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { signal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthResponse, LoginRequest, RefreshTokenRequest, ResendVerificationEmailRequest, UserRegisterRequest } from '../models/auth.model';
+import { AuthResponse, LoginRequest, ForgotPasswordRequest, RefreshTokenRequest, ResendVerificationEmailRequest, UserRegisterRequest, NewPasswordRequest } from '../models/auth.model';
 import { ApiResponse } from '../models/page.model';
 import { Router } from '@angular/router';
 
@@ -42,6 +42,14 @@ export class AuthService {
 
     logout(refreshTokenRequest: RefreshTokenRequest): Observable<ApiResponse> {
         return this.http.post<ApiResponse>(`${this.baseUrl}/logout`, refreshTokenRequest);
+    }
+
+    forgotPassword(forgotPasswordRequest: ForgotPasswordRequest): Observable<void> {
+        return this.http.post<void>(`${this.baseUrl}/forgot-password`, forgotPasswordRequest);
+    }
+
+    resetPassword(newPasswordRequest: NewPasswordRequest): Observable<void> {
+        return this.http.patch<void>(`${this.baseUrl}/reset-password`, newPasswordRequest);
     }
 
     saveTokens(authResponse: AuthResponse) {

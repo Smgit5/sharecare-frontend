@@ -23,3 +23,12 @@ export interface RefreshTokenRequest {
 export interface ResendVerificationEmailRequest {
     email: string;
 }
+
+export interface ForgotPasswordRequest {
+    email: string;
+}
+
+export interface NewPasswordRequest {
+    token: string;
+    newPassword: string;
+}

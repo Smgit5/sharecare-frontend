@@ -46,12 +46,17 @@
 
       <div class="auth-switch">
         <span>Don't have an account?</span>
-        <button type="button" routerLink="/register">Register</button>
+        <a routerLink="/register" class="auth-link">Register</a>
       </div>
 
       <div class="auth-switch">
         <span>Didn't verify your email?</span>
-        <button type="button" routerLink="/resend-verification-email">Resend verification email</button>
+        <a routerLink="/resend-verification-email" class="auth-link">Resend verification email</a>
+      </div>
+
+      <div class="auth-switch">
+        <span>Forgot your password?</span>
+        <a routerLink="/forgot-password" class="auth-link">Reset password</a>
       </div>
     </form>
   </section>

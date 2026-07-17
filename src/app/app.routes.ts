@@ -7,6 +7,8 @@ import { Register } from './features/auth/register/register';
 import { HomeComponent } from './features/home/home.component/home.component';
 import { EmailVerificationComponent } from './features/auth/email-verification.component/email-verification.component';
 import { ResendVerificationEmailComponent } from './features/auth/resend-verification-email.component/resend-verification-email.component';
+import { ForgotPasswordComponent } from './features/auth/forgot-password.component/forgot-password.component';
+import { ResetPasswordComponent } from './features/auth/reset-password.component/reset-password.component';
 
 export const routes: Routes = [
     {
@@ -20,6 +22,14 @@ export const routes: Routes = [
     {
         path: 'resend-verification-email',
         component: ResendVerificationEmailComponent
+    },
+    {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent
+    },
+    {
+        path: 'reset-password',
+        component: ResetPasswordComponent
     },
     {
         path: 'demo-test',
