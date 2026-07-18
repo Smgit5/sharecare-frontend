@@ -16,8 +16,10 @@ export class ResetPasswordComponent implements OnInit{
   private authService = inject(AuthService);
   private toastService = inject(ToastService);
   private route = inject(ActivatedRoute);
+  showPassword = signal(false);
   isSubmitting = signal(false);
   isResetSuccessful = signal(false);
+  isResetFailed = signal(false);
   title = signal('Reset your password');
   message = signal('Enter a new password for your ShareCare account.');
   confirmPassword = '';
@@ -28,6 +30,7 @@ export class ResetPasswordComponent implements OnInit{
       this.toastService.showErrorToast('Unable to reset password right now. Please try again later.');
       this.title.set('Reset link unavailable');
       this.message.set('The password reset link is missing or invalid.');
+      this.isResetFailed.set(true);
       return;
     }
     this.newPasswordRequest.token = token;
@@ -40,6 +43,10 @@ export class ResetPasswordComponent implements OnInit{
 
   passwordsMatch(): boolean {
     return this.newPasswordRequest.newPassword === this.confirmPassword;
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword.update((isVisible) => !isVisible);
   }
 
   canReset(): boolean {
@@ -84,6 +91,12 @@ export class ResetPasswordComponent implements OnInit{
         this.title.set('Password reset successful');
         this.message.set('Your password has been reset successfully. You can go back to ShareCare and login with your new password.');
         this.toastService.showSuccessToast('Your password has been reset successfully.');
+      },
+      error: () => {
+        this.isResetFailed.set(true);
+        this.title.set('Reset failed');
+        this.message.set('The password reset link is invalid or has expired.');
+        this.toastService.showErrorToast('Unable to reset password right now.');
       }
     });
   }

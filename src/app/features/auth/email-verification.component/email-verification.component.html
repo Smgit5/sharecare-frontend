@@ -1,6 +1,23 @@
 <main class="verification-page">
   <section class="verification-card">
     <h1>{{ title() }}</h1>
-    <p>{{ message() }}</p>
+
+    @if (!isVerificationSuccessful() && !isVerificationFailed()) {
+      <p>{{ message() }}</p>
+    }
+
+    @if (isVerificationSuccessful()) {
+      <div class="status-card success-card">
+        <p class="success-text">Your email has been verified successfully.</p>
+        <p class="success-note">You can go back to ShareCare and login with your verified account.</p>
+        <a routerLink="/login" class="auth-link">Go to login</a>
+      </div>
+    } @else if (isVerificationFailed()) {
+      <div class="status-card failure-card">
+        <p class="failure-text">Email verification could not be completed.</p>
+        <p class="failure-note">Please resend the verification email and try again.</p>
+        <a routerLink="/resend-verification-email" class="auth-link">Resend verification email</a>
+      </div>
+    }
   </section>
 </main>
