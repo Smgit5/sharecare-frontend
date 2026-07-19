@@ -4,11 +4,15 @@ import { BehaviorSubject, catchError, filter, switchMap, take, throwError } from
 import { AuthService } from '../../services/auth';
 import { RefreshTokenRequest } from '../../models/auth.model';
 import { AUTH_ERROR } from '../../../constants/auth-errors';
+import { ToastService } from '../../services/toast';
+import { Router } from '@angular/router';
 
 let isRefreshing = false;
 const refreshSubject = new BehaviorSubject<string | null>(null);
 
 export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
+  const toastService = inject(ToastService);
+  const router = inject(Router);
   const authService = inject(AuthService);
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -43,6 +47,11 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
             catchError((refreshError: HttpErrorResponse) => {
               isRefreshing = false;
               refreshSubject.next(null);
+              toastService.showErrorToast(AUTH_ERROR.SESSION_EXPIRED);
+              setTimeout(() => {
+                authService.clearTokens();
+                router.navigate(['/login']);
+              }, 2000);
               return throwError(() => refreshError);
             })
           );
@@ -60,7 +69,8 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
             })
           );
         }
-      } else {
+      }
+      else {
         return throwError(() => error);
       }
     })
