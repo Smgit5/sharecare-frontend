@@ -4,6 +4,7 @@ import { AuthService } from '../../core/services/auth';
 import { Theme } from '../../core/services/theme';
 import { RefreshTokenRequest } from '../../core/models/auth.model';
 import { finalize } from 'rxjs';
+import { ERROR_CODE } from '../../constants/error-response';
 
 @Component({
   selector: 'app-header',

@@ -49,7 +49,7 @@ export class Register {
     }
 
     this.authService.register(this.userRegisterRequest).subscribe({
-      next: (response) => {
+      next: () => {
         this.toastService.showSuccessToast('Registration successful. An email has been sent to your gmail inbox. Please verify your email.', 5000);
       },
       error: (error) => {

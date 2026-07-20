@@ -1,3 +1,5 @@
+import { ErrorCode } from "../../constants/error-response";
+
 export interface PageResponse<T> {
     content: T[];
     page: number;
@@ -10,5 +12,6 @@ export interface PageResponse<T> {
 
 export interface ApiResponse {
     status: number;
+    code: ErrorCode;
     message: string;
 }

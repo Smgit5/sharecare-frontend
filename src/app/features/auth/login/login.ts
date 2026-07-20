@@ -4,6 +4,7 @@ import { AuthService } from '../../../core/services/auth';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../../../core/models/auth.model';
 import { RouterLink } from '@angular/router';
+import { ToastService } from '../../../core/services/toast';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login.css',
 })
 export class Login {
+  private toastService = inject(ToastService);
   showPassword = signal(false);
 
   loginRequest: LoginRequest = {

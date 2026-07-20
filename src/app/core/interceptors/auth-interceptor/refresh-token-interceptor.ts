@@ -3,9 +3,10 @@ import { inject } from '@angular/core';
 import { BehaviorSubject, catchError, filter, switchMap, take, throwError } from 'rxjs';
 import { AuthService } from '../../services/auth';
 import { RefreshTokenRequest } from '../../models/auth.model';
-import { AUTH_ERROR } from '../../../constants/auth-errors';
+import { ERROR_CODE, ERROR_MESSAGE } from '../../../constants/error-response';
 import { ToastService } from '../../services/toast';
 import { Router } from '@angular/router';
+import { ApiResponse } from '../../models/page.model';
 
 let isRefreshing = false;
 const refreshSubject = new BehaviorSubject<string | null>(null);
@@ -16,9 +17,9 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      const errorCode = error.status;
-      const message = error.error?.message;
-      if (errorCode === 401 && message === AUTH_ERROR.ACCESS_TOKEN_EXPIRED) {
+      const response = error.error as ApiResponse;
+      const code = response.code;
+      if (code === ERROR_CODE.ACCESS_TOKEN_EXPIRED) {
         const currentRefreshToken = authService.fetchRefreshToken();
         if (!currentRefreshToken) {
           return throwError(() => error);
@@ -47,7 +48,7 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
             catchError((refreshError: HttpErrorResponse) => {
               isRefreshing = false;
               refreshSubject.next(null);
-              toastService.showErrorToast(AUTH_ERROR.SESSION_EXPIRED);
+              toastService.showErrorToast(ERROR_MESSAGE.SESSION_EXPIRED);
               setTimeout(() => {
                 authService.clearTokens();
                 router.navigate(['/login']);
